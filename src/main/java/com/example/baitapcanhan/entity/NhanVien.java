@@ -28,5 +28,9 @@ public class NhanVien {
     private PhongBan phongBan;
     @Column
     private Long luong;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id",referencedColumnName = "id")
+    private User user;
 }
 

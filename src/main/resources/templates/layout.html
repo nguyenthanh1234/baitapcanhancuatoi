@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thmeleaf.org/thymeleaf-extras-pringsecurity4">
 <head>
   <meta charset="UTF-8">
   <title>My App</title>
@@ -21,7 +21,15 @@
           <li class="nav-item">
             <a class="nav-link active" aria-current="pape" href="/">Home</a>
           </li>
-          <li class="nav-item"><a class="nav-link" href="/nhanViens">List Nhân Viên</a> </li>
+          <li class="nav-item"><a class="nav-link" href="/nhanviens">List Nhân Viên</a> </li>
+          <li sec:authorize="isAuthenticated()">
+            <form th:action="@{/logout}" method="post">
+              <button class="btn btn-outline-danger" type="submit">Logout</button>
+            </form>
+          </li>
+          <li sec:authorize="!isAuthenticated()">
+            <a class="btn btn-outline-primary" href="/login">Login</a>
+          </li>
         </ul>
       </div>
     </div>

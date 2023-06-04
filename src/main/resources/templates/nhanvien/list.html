@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www/thymeleaf.org/thymeleaf-extras-springsecurity4"
+
+>
 <head>
   <meta charset="UTF-8">
   <title>List Nhân Viên</title>
@@ -8,8 +11,11 @@
 <body>
 <th:block th:replace="~{layout::header}"></th:block>
 <div class="container">
-  <a href="/nhanviens/add"><button class="btn btn-primary">Create Nhân Viên</button></a>
-  <h1 >Nguyễn Văn Thanh - 2080600665</h1>
+    <div sec:authorize="hasAnyAuthority('ADMIN')">
+
+    <a href="/nhanviens/add"><button class="btn btn-primary">Create Nhân Viên</button></a>
+  </div>
+        <h1 >Nguyễn Văn Thanh - 2080600665</h1>
   <table class="table">
     <tr>
       <th>Mã Nhân Viên</th>
@@ -18,7 +24,8 @@
       <th>Nơi Sinh</th>
       <th>Tên Phòng</th>
       <th>Lương</th>
-      <th>Action</th>
+     <th sec:authorize="hasAnyAuthority('ADMIN')">Action</th>
+
     </tr>
     <tr th:each="nhanVien:${nhanViens}">
       <td th:text="${nhanVien.maNV}"></td>
@@ -40,7 +47,7 @@
 <!--        <img height="120" width="150" th:src="@{/images/} + ${product.image}">-->
 <!--      </td>-->
 <!--      <td th:text="${product.price}"></td>-->
-      <td>
+        <td sec:authorize="hasAnyAuthority('ADMIN')">
         <a th:href="@{/nhanviens/edit/{id}(id=${nhanVien.maNV})}">Edit</a> |
         <a th:href="@{/nhanviens/delete/{id}(id=${nhanVien.maNV})}"
            onclick="return confirm('Are you sure?')">Delete</a>
