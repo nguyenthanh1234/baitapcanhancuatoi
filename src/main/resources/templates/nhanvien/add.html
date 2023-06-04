@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <th:block th:replace="~{layout::link-css}"></th:block>
+  <title >Create Nhân Viên</title>
+</head>
+<body>
+<th:block th:replace="~{layout::header}"></th:block>
+<div class="container">
+  <h1>Add Nhân Viên</h1>
+  <form th:action="@{/nhanviens/add}" th:object="${nhanVien}"  method="post"?>
+    <div class="col-6 mb-3">
+      <label class="form-label" for="maNV" >Mã Nhân Viên: </label>
+      <input class="form-control" type="text" th:field="*{maNV}" id="maNV">
+    </div>
+    <div class="col-6 mb-3">
+      <label class="form-label" for="ten_NV" >Tên nhân viên: </label>
+      <input class="form-control" type="text" th:field="*{ten_NV}" id="ten_NV">
+      <span class="text-danger" th:if="${#fields.hasErrors('ten_NV')}" th:errors="*{ten_NV}"></span>
+    </div>
+    <div class="col-6 mb-3">
+      <label class="form-label" for="phai" >Phái: </label>
+      <input class="form-control" type="text" th:field="*{phai}" id="phai">
+      <span class="text-danger" th:if="${#fields.hasErrors('phai')}" th:errors="*{phai}"></span>
+    </div>
+    <div class="col-6 mb-3">
+      <label class="form-label" for="noiSinh" >Nơi Sinh: </label>
+      <input class="form-control" type="text" th:field="*{noiSinh}" id="noiSinh">
+      <span class="text-danger" th:if="${#fields.hasErrors('noiSinh')}" th:errors="*{noiSinh}"></span>
+    </div>
+    <div class="col-6 mb-3">
+      <label class="form-label" for="phongBan" >Phòng ban: </label>
+      <select class="form-control" id="phongBan" name="phongBan.maPhong">
+        <option value="">-- Select Phòng ban --</option>
+        <option th:each="phongBan : ${phongBans}" th:value="${phongBan.maPhong}"
+                th:text="${phongBan.tenPhong}"></option>
+      </select>
+      <span class="text-danger" th:if="${#fields.hasErrors('phongBan')}" th:errors="*{phongBan}"></span>
+    </div>
+    <div class="col-6 mb-3">
+      <label class="form-label" for="luong" >Lương: </label>
+      <input class="form-control" type="text" th:field="*{luong}" id="luong">
+      <span class="text-danger" th:if="${#fields.hasErrors('luong')}" th:errors="*{luong}"></span>
+    </div>
+    <input type="submit" class="btn btn-primary" value="Save">
+  </form>
+  <br>
+  <a th:href="@{/products}">Back to List</a>
+</div>
+<th:block th:replace="~{layout :: footer}"></th:block>
+</body>
+</html>
