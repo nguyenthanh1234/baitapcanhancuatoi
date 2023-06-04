@@ -25,6 +25,6 @@ public class NhanVienService {
 
     public void delete(String maNV){
 
-        repo.deleteById(Integer.valueOf(maNV));
+        repo.deleteById(maNV);
     }
 }

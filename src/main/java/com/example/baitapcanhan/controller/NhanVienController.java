@@ -51,6 +51,7 @@ public class NhanVienController {
     @GetMapping("/edit/{maNV}")
     public String editNhanVienForm(@PathVariable("maNV") String maNV, Model model){
         NhanVien editNhanVien = null;
+//        model.addAttribute("phongBans",phongBanService.GetAll());
         model.addAttribute("phongBans",phongBanService.GetAll());
         for(NhanVien nhanVien : nhanVienService.GetAll()){
             if(nhanVien.getMaNV().equals(maNV)){
@@ -59,7 +60,7 @@ public class NhanVienController {
         }
         if(editNhanVien != null){
             model.addAttribute("nhanVien",editNhanVien);
-            return "nhanviens/edit";
+            return "nhanvien/edit";
         }else{
             return "not-found";
         }
@@ -74,7 +75,7 @@ public class NhanVienController {
         }
         for(int i = 0; i<nhanVienService.GetAll().size();i++){
             NhanVien nhanVien = nhanVienService.GetAll().get(i);
-            if(nhanVien.getMaNV() == updatedNhanVien.getMaNV()){
+            if(nhanVien.getMaNV().equals(updatedNhanVien.getMaNV())){
                 nhanVienService.GetAll().set(i,updatedNhanVien);
                 nhanVienService.update(updatedNhanVien);
                 break;
@@ -87,7 +88,7 @@ public class NhanVienController {
         Iterator<NhanVien> iterator = nhanVienService.GetAll().iterator();
         while (iterator.hasNext()){
             NhanVien nhanVien = iterator.next();
-            if(nhanVien.getMaNV() == maNV){
+            if(nhanVien.getMaNV().equals(maNV)){
 //                iterator.remove();
                 nhanVienService.delete(maNV);
                 break;
